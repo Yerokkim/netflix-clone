@@ -2,7 +2,7 @@ import 'package:netflix_clone/domain/movie/movie_result.dart';
 
 abstract class Movie {
   final int? page;
-  final List<MovieResult>? results;
+  late final List<MovieResult>? results;
   final int? totalPages;
   final int? totalResults;
 
