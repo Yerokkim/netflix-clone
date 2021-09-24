@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:netflix_clone/domain/auth/email_address.dart';
 import 'package:netflix_clone/domain/auth/password.dart';
 import 'package:riverpod/riverpod.dart';
