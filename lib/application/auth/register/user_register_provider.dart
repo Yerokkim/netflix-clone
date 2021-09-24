@@ -16,7 +16,6 @@ class RegisterStateNotifier extends StateNotifier<AsyncValue> {
       final pw = _reader(passwordProvider).state;
       final nickName = _reader(nickNameProvider).state;
 
-      print(email);
       final _authRepository = _reader(firebaseAuthRepositoryProvider);
 
       final emails = EmailAddress(email);
