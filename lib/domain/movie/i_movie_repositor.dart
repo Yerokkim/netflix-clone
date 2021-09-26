@@ -7,8 +7,14 @@ final movieRepositoryProvider = Provider<IMovieRepository>((ref) => throw Unimpl
 
 abstract class IMovieRepository {
   Future<Movie?> getMovies();
-  Future<void> addToMovieList({
+  Future<String> addToMovieList({
     required MovieResultModel movie,
     required String userId,
   });
+  Future<void> deleteMovie({
+    required String id,
+    required String userId,
+  });
+
+  Future<bool> hasAdded({required String movieId, required String userId});
 }
