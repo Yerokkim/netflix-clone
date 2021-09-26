@@ -14,9 +14,11 @@ class SavedMovieModel extends SavedMovie {
   SavedMovieModel({
     required String userId,
     required MovieResultModel movie,
+    String? id,
     bool isAdded = true,
     DateTime? createdAt,
   }) : super(
+          id: id,
           userId: userId,
           movie: movie,
           isAdded: isAdded,

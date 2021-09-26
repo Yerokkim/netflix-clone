@@ -11,6 +11,7 @@ SavedMovieModel _$SavedMovieModelFromJson(Map<String, dynamic> json) {
   return SavedMovieModel(
     userId: json['userId'] as String,
     movie: MovieResultModel.fromJson(json['movie'] as Map<String, dynamic>),
+    id: json['id'] as String?,
     isAdded: json['isAdded'] as bool? ?? true,
     createdAt: const NullableTimestampConverter()
         .fromJson(json['createdAt'] as Timestamp?),
@@ -19,6 +20,7 @@ SavedMovieModel _$SavedMovieModelFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$SavedMovieModelToJson(SavedMovieModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'userId': instance.userId,
       'movie': instance.movie.toJson(),
       'createdAt':
