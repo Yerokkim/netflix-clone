@@ -7,6 +7,7 @@ import 'package:netflix_clone/domain/movie/movie.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:netflix_clone/domain/movie/movie_failure.dart';
 import 'package:netflix_clone/domain/movie/movie_result.dart';
+import 'package:netflix_clone/domain/user/saved_movie.dart';
 import 'package:netflix_clone/infrastructure/database/external_api_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:netflix_clone/infrastructure/database/firestore_service.dart';
@@ -42,7 +43,7 @@ class MovieRepository implements IMovieRepository {
     return movie;
   }
 
-  Future<void> addToMovieList({
+  Future<String> addToMovieList({
     required MovieResultModel movie,
     required String userId,
   }) async {
@@ -55,11 +56,38 @@ class MovieRepository implements IMovieRepository {
         userId: userId,
         movie: movie,
         createdAt: now,
+        id: userDocRef.id,
       );
 
       await userDocRef.set(movieInfo.toJson());
+      return userDocRef.id;
     } catch (e) {
       throw const MoiveFailure.unexpected();
     }
+  }
+
+  @override
+  Future<void> deleteMovie({required String id, required String userId}) async {
+    try {
+      await FirestoreService.userMovieList(userId).doc(id).delete();
+    } catch (e) {
+      throw const MoiveFailure.unexpected();
+    }
+  }
+
+  @override
+  Future<bool> hasAdded({
+    required String movieId,
+    required String userId,
+  }) async {
+    List<SavedMovie> movieList = [];
+    FirestoreService.userMovieList(userId).snapshots().map((snap) {
+      movieList = snap.docs.map((document) {
+        return SavedMovieModel.fromJson(document.data());
+      }).toList();
+
+      return movieList.any((e) => e.movie.id.toString() == movieId);
+    });
+    return movieList.any((e) => e.movie.id.toString() == movieId);
   }
 }
