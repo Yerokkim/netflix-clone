@@ -4,13 +4,15 @@ class ActionButtonList extends StatelessWidget {
   final VoidCallback? firstActionButtonPressed;
   final VoidCallback? secondActionButtonPressed;
   final VoidCallback? thirdActionButtonPressed;
+  final bool isFirstActionBtnClicked;
 
-  const ActionButtonList(
-      {Key? key,
-      this.firstActionButtonPressed,
-      this.secondActionButtonPressed,
-      this.thirdActionButtonPressed})
-      : super(key: key);
+  const ActionButtonList({
+    Key? key,
+    this.firstActionButtonPressed,
+    this.secondActionButtonPressed,
+    this.thirdActionButtonPressed,
+    this.isFirstActionBtnClicked = false,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,14 +21,21 @@ class ActionButtonList extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
-        Column(
-          children: [
-            Icon(Icons.add),
-            SizedBox(
-              height: 5,
-            ),
-            Text('My List'),
-          ],
+        InkWell(
+          onTap: firstActionButtonPressed,
+          child: Column(
+            children: [
+              isFirstActionBtnClicked
+                  ? Icon(
+                      Icons.check,
+                    )
+                  : Icon(Icons.add),
+              SizedBox(
+                height: 5,
+              ),
+              Text('My List'),
+            ],
+          ),
         ),
         ElevatedButton.icon(
             onPressed: () {/* do something here */},
