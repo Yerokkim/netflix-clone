@@ -17,8 +17,14 @@ class AuthRepository extends IAuthFacade {
   IAuthUser get currentUser => throw UnimplementedError();
 
   @override
-  Future<String> getCurrentUserId() {
-    throw UnimplementedError();
+  Future<String> getCurrentUserId() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null) {
+      throw Exception('Current user is null!');
+    }
+
+    return currentUser.uid;
   }
 
   Future<IAuthResult> _mapFirebaseUserToAuthResult(User? user) async {
