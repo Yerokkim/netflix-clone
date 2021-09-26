@@ -1,5 +1,5 @@
 import 'package:netflix_clone/domain/movie/i_movie_repositor.dart';
-import 'package:netflix_clone/domain/movie/movie.dart';
+
 import 'package:netflix_clone/domain/movie/movie_result.dart';
 
 import 'package:riverpod/riverpod.dart';
