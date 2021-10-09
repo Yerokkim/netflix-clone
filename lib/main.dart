@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:netflix_clone/domain/auth/i_auth_facade.dart';
-import 'package:netflix_clone/domain/movie/i_movie_repositor.dart';
+import 'package:netflix_clone/domain/movie/i_movie_repository.dart';
 import 'package:netflix_clone/domain/user/i_user_repository.dart';
 import 'package:netflix_clone/infrastructure/auth/auth_repository.dart';
 import 'package:netflix_clone/infrastructure/movie/movie_repository.dart';
